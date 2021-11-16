@@ -4,8 +4,8 @@
 import math
 
 
-def exception():   # Функция обработки исключения.
-    a = input(f"Введите сторону треугольника")
+def exception():  # Функция обработки исключения.
+    a = input(f"Введите сторону треугольника: ")
     while type(a) != int:
         try:
             a = int(a)
@@ -18,18 +18,18 @@ def exception():   # Функция обработки исключения.
     return a
 
 
-
 def trianglePS(side):
-    p= 3*side
-    s = side * 2 * math.sqrt(3) / 4
+    p = 3 * side
+    s = side ** 2 * (math.sqrt(3) / 4)
 
     return p, s
 
 
-side1 = exception()
-side2 = exception()
-side3 = exception()
+perim1, plosh1 = trianglePS(exception())
+perim2, plosh2 = trianglePS(exception())
+perim3, plosh3 = trianglePS(exception())
 
-print(f"периметр первого треугольника = {exception(side1)};  Площадь первого треугольника = {}")
-print(f"")
-print(f"")
+print(f"периметр первого треугольника = {perim1};  Площадь первого треугольника = {round(plosh1, 1)}")
+print(f"периметр второго треугольника = {perim2};  Площадь второго треугольника = {round(plosh2, 1)}")
+print(f"периметр третьего треугольника = {perim3};  Площадь третьего треугольника = {round(plosh3, 1)}")
+

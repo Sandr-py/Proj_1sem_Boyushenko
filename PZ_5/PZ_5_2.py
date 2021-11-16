@@ -18,14 +18,13 @@ def exception():  # Функция обработки исключения.
     return a
 
 
-def trianglePS(side):
+def trianglePS(side):   # Вычисление площади и периметра равностороннего треугольника.
     p = 3 * side
     s = side ** 2 * (math.sqrt(3) / 4)
-
     return p, s
 
 
-perim1, plosh1 = trianglePS(exception())
+perim1, plosh1 = trianglePS(exception())   # Трёхкратный вызов функции.
 perim2, plosh2 = trianglePS(exception())
 perim3, plosh3 = trianglePS(exception())
 

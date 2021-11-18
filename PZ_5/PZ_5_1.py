@@ -10,7 +10,7 @@ def exception(a):   # Функция обработки исключения.
 
 
 def summari():   # Главная функция  с интеграцией обработки исключений и проведением рассчётов.
-    stopWord = '2'
+    stopWord = 'fill'
     summ = 0
     while stopWord != '1':
         num = input('Введите число: ')

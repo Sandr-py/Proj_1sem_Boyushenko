@@ -3,7 +3,7 @@
 
 from random import randint
 
-def change_obj(lim):
+def change_obj(lim):   # Создание функции, меняющей соседние элементы списка.
     my_list = []
     for i in range(lim):
         num = randint(1, 100)
@@ -13,9 +13,11 @@ def change_obj(lim):
         my_list[i], my_list[i + 1] = my_list[i + 1], my_list[i]
     return my_list
 
+# Проверка на ввод чётного и положительного предела
+
 a = int(input(f"Введите чётный предел списка: "))
 while a % 2 != 0 or a < 0:
     print(f"Вы ввели нечётное или отрицательное число")
     a = int(input(f"Введите чётный пердел списка"))
 
-print(f"Конечный список: {change_obj(a)}")
+print(f"Конечный список: {change_obj(a)}") # Вывод с вызовом функции.

@@ -3,6 +3,8 @@
 
 from random import randint
 
+# Функция со сравнением следующего и предыдущего элемента относительно
+# текущего в списке.
 
 def min_lists_obj(lim):
     my_list = []
@@ -13,6 +15,7 @@ def min_lists_obj(lim):
         if my_list[i] < my_list[i + 1] and my_list[i] < my_list[i - 1]:
             return my_list[i], my_list
 
-
+# Вывод локального минимума и его идентификатора.
+        
 LocMin, AllList = min_lists_obj(int(input(f"Введите предел списка   ")))
 print(f"Превый локальный минимум списка {AllList}: {LocMin}")

@@ -1,0 +1,53 @@
+# Реализовать прототип в IDE PyCharm Community с применением пакета tk. Получить интерфейс максимально
+# приближенный к оригиналу.
+
+from tkinter import *
+from tkinter import ttk
+
+root = Tk()
+root.title("Анкета Web-Разработчика")
+root.geometry('700x500')
+
+label = Label(text = 'Анкета Web-Разработчика', font = ('Times New Roman', 20))
+label.grid(row = 0, column = 0, sticky = N)
+
+frame1 = LabelFrame(master=root, relief=RAISED, borderwidth=1)
+frame1.grid(row=1, column=0, sticky=W+E)
+frame2 = LabelFrame(master=root, relief=RAISED, borderwidth=1)
+frame2.grid(row=1, column=1, sticky=W+E)
+frame3 = LabelFrame(master=root, relief=RAISED, borderwidth=1)
+frame3.grid(row=2, column=0, sticky=W+E)
+frame4 = LabelFrame(master=root, relief=RAISED, borderwidth=1)
+frame4.grid(row=2, column=1, sticky=W+E)
+frame5 = LabelFrame(master=root, relief=RAISED, borderwidth=1)
+frame5.grid(row=3, column=0, sticky=W+E)
+frame6 = LabelFrame(master=root, relief=RAISED, borderwidth=1)
+frame6.grid(row=3, column=1, sticky=W+E)
+frame7 = LabelFrame(master=root, relief=RAISED, borderwidth=1)
+frame7.grid(row=4, column=0, sticky=W+E)
+frame8 = LabelFrame(master=root, relief=RAISED, borderwidth=1)
+frame8.grid(row=4, column=1, sticky=W+E)
+frame9 = LabelFrame(master=root, relief=RAISED, borderwidth=1)
+frame9.grid(row=5, column=0, sticky=W+E)
+frame10 = LabelFrame(master=root, relief=RAISED, borderwidth=1)
+frame10.grid(row=5, column=1, sticky=W+E)
+frame11 = LabelFrame(master=root, relief=RAISED, borderwidth=1)
+frame11.grid(row=6, column=0, sticky=W+E)
+frame12 = LabelFrame(master=root, relief=RAISED, borderwidth=1)
+frame12.grid(row=6, column=1, sticky=W+E)
+lable1 = Label(master=frame1, text='Регистрационное имя', font=('Times New Roman', 15))
+lable1.grid(row=1, column=0, sticky=W+E)
+name = Entry(master=frame2, width=40, relief=RAISED, borderwidth=1)
+name.grid(row=1, column=1, sticky=W+E)
+lable2 = Label(master= frame3,text = 'Пароль', font=('Times New Roman', 15))
+lable2.grid(row=2, column=0, sticky=W)
+password = Entry(master=frame4, width=40, relief=RAISED, borderwidth=1)
+password.grid(row=3, column=1, sticky = E+W)
+double_password = Entry(master=frame4, width=40)
+double_password.grid(row=3, columnspan=1)
+Label(master= frame5,text = 'Ваша специализация', font=('Times New Roman', 15)).grid(row=3, column=0, sticky=W)
+Label(master= frame7,text = 'Пол', font=('Times New Roman', 15)).grid(row=4, column=0, sticky=W)
+Label(master= frame9,text = 'Ваши навыки', font=('Times New Roman', 15)).grid(row=5, column=0, sticky=W)
+Label(master=frame11, text = 'Дополнительные свдения о себе', font=('Times New Roman', 15)).grid(row=6, column=0, sticky=W)
+
+root.mainloop()

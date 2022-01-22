@@ -1,0 +1,15 @@
+Initial Data:  
+-66 -81 -47 9 83 48 -1 85 -30 59 72
+
+Data's size: 
+35
+
+Minimal element:  
+-81
+
+Square of even elements:  
+4356 2304 900 5184
+
+Sum square of even elements: 
+12744
+

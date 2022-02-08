@@ -7,13 +7,11 @@
 from random import randint
 
 my_list = [randint(-999, 999) for i in range(int(input(f"Введите предел последовательности: ")))]
-print('Изначальная последовательность: ', *my_list)   # Генерация списка из случайных чисел.
+print('Изначальная последовательность: ', *my_list, end='\n\n')  # Генерация списка из случайных чисел.
 
-# Генерация новых списков на основе главного с проверкой на кратность.
+eq_list = list(filter(lambda x: x % 3 == 0, my_list))
+otherel_list = list(filter(lambda n: n not in eq_list, my_list))
 
-eq_list = list(filter(lambda n: n % 2 == 0, my_list))
-nteq_list = list(filter(lambda m: m % 3 == 0, my_list))
+print(f"Числа, кратные трём: {eq_list}\n Количество элементов: {len(eq_list)}\n\n")  # Вывод результата.
 
-print(f"Числа, кратные двум:", *eq_list)   # Вывод результата.
-
-print(f"Числа, кратные трём:", *nteq_list)
+print(f"Остальные числа главного списка: {otherel_list}\n Количество элементов: {len(otherel_list)}")

@@ -10,7 +10,6 @@ my_list = [randint(-999, 999) for i in range(int(input(f"Введите пред
 print('Изначальная последовательность: ', *my_list, end='\n\n')  # Генерация списка из случайных чисел.
 
 eq_list = list(filter(lambda x: x % 3 == 0, my_list))
-
 otherel_list = list(filter(lambda n: n not in eq_list, my_list))
 
 print(f"Числа, кратные трём: {eq_list}\n Количество элементов: {len(eq_list)}\n\n")  # Вывод результата.

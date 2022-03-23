@@ -1,16 +1,18 @@
 import module
 
-from figures import circle_area
+import figures
 
-# module.get_set()
-#
-# module.get_txt()
-#
-# print(module.list_doc.doc)
-#
-# print(module.file_doc.doc)
-#
-# print(module.get_binary())
-#
-# print(dir(module))
+module.get_set()
+
+module.get_txt()
+
+print(module.list_doc.doc)
+
+print(module.file_doc.doc)
+
+print(module.get_binary())
+
+print(dir(module))
+
+print(figures.circle_area())
 

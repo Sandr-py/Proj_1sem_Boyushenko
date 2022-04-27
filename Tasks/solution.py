@@ -49,3 +49,4 @@ print('Задание №10:\n', re.findall(r': (.*)</a>', text), end='\n\n')
 empty = (re.findall(r'(.){0}\n\n', text))
 
 print(f"Задание №11:\nКоличество пустых строк: {len(empty)}")
+

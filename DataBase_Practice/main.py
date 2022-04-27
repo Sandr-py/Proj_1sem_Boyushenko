@@ -19,4 +19,10 @@ with connect('Saper.db') as db:
 
     print(cur.execute(f"SELECT * FROM users WHERE old BETWEEN 18 AND 20").fetchall())
 
-    print(cur.execute())
+    cur.execute(f"UPDATE users SET old = 20 WHERE old = 19")
+
+    cur.execute(f"UPDATE users SET score=score+300 WHERE score < 1000")
+
+    cur.execute(f"UPDATE users SET score = score + 100 WHERE old >= 20")
+
+    cur.execute(f"DELETE FROM users WHERE score <= 1000")

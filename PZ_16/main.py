@@ -18,33 +18,34 @@ class Main(tk.Frame):
         toolbar = tk.Frame(bg='#a0dea0', bd=4)
         toolbar.pack(side=tk.TOP, fill=tk.X)
 
-        # self.add_img = tk.PhotoImage(file="BD/11.gif")
+        self.add_img = tk.PhotoImage(file="img/add.gif")
         self.btn_open_dialog = tk.Button(toolbar, text='Добавить игрока', command=self.open_dialog, bg='#5da130', bd=0,
-                                         compound=tk.TOP)
+                                         compound=tk.TOP, image=self.add_img)
         self.btn_open_dialog.pack(side=tk.LEFT)
 
-        # self.update_img = tk.PhotoImage(file="BD/12.gif")
+        self.edit_img = tk.PhotoImage(file="img/edit.gif")
         btn_edit_dialog = tk.Button(toolbar, text="Редактировать", command=self.open_update_dialog, bg='#5da130',
-                                    bd=0, compound=tk.TOP)
+                                    bd=0, compound=tk.TOP, image=self.edit_img)
         btn_edit_dialog.pack(side=tk.LEFT)
 
-        # self.delete_img = tk.PhotoImage(file="BD/13.gif")
+        self.delete_img = tk.PhotoImage(file="img/delete.gif")
         btn_delete = tk.Button(toolbar, text="Удалить запись", command=self.delete_records, bg='#5da130',
-                               bd=0, compound=tk.TOP)
+                               bd=0, compound=tk.TOP, image=self.delete_img)
         btn_delete.pack(side=tk.LEFT)
 
-        # self.search_img = tk.PhotoImage(file="BD/14.gif")
+        self.search_img = tk.PhotoImage(file="img/search.gif")
         btn_search = tk.Button(toolbar, text="Поиск записи", command=self.open_search_dialog, bg='#5da130',
-                               bd=0, compound=tk.TOP)
+                               bd=0, compound=tk.TOP, image=self.search_img)
         btn_search.pack(side=tk.LEFT)
 
-        # self.refresh_img = tk.PhotoImage(file="BD/15.gif")
+        self.refresh_img = tk.PhotoImage(file="img/update.gif")
         btn_refresh = tk.Button(toolbar, text="Обновить экран", command=self.view_records, bg='#5da130',
-                                bd=0, compound=tk.TOP)
+                                bd=0, compound=tk.TOP, image=self.refresh_img)
         btn_refresh.pack(side=tk.LEFT)
 
         self.tree = ttk.Treeview(self, columns=(
-        'user_id', 'name', 'date_of_birth', 'post', 'science_degree', 'burden', 'wages'), height=15, show='headings')
+            'user_id', 'name', 'date_of_birth', 'post', 'science_degree', 'burden', 'wages'), height=15,
+                                 show='headings')
 
         self.tree.column('user_id', width=50, anchor=tk.CENTER)
         self.tree.column('name', width=180, anchor=tk.CENTER)
@@ -64,13 +65,14 @@ class Main(tk.Frame):
 
         self.tree.pack()
 
-    def records(self, user_id, name, sex, old, score):
-        self.db.insert_data(user_id, name, sex, old, score)
+    def records(self, user_id, name, dob, post, sd, burden, sall):
+        self.db.insert_data(user_id, name, dob, post, sd, burden, sall)
         self.view_records()
 
-    def update_record(self, user_id, name, sex, old, score):
-        self.db.cur.execute("""UPDATE users SET user_id=?, name=?, sex=?, old=?, score=? WHERE user_id=?""",
-                            (user_id, name, sex, old, score, self.tree.set(self.tree.selection()[0], '#1')))
+    def update_record(self, user_id, name, dob, post, sd, burden, sall):
+        self.db.cur.execute(
+            """UPDATE users SET user_id=?, name=?, date_of_birth=?, post=?, science_degree=?, burden=?, wages=? WHERE user_id=?""",
+            (user_id, name, dob, post, sd, burden, sall, self.tree.set(self.tree.selection()[0], '#1')))
         self.db.con.commit()
         self.view_records()
 
@@ -85,15 +87,9 @@ class Main(tk.Frame):
         self.db.con.commit()
         self.view_records()
 
-    # def search_records(self, user_id):
-    #     user_id = ("%" + user_id + "%",)
-    #     self.db.cur.execute("""SELECT * FROM users WHERE name LIKE ?""", user_id)
-    #     [self.tree.delete(i) for i in self.tree.get_children()]
-    #     [self.tree.insert('', 'end', values=row) for row in self.db.cur.fetchall()]
-
-    def search_records(self, score):
-        score = (score,)
-        self.db.cur.execute("""SELECT * FROM users WHERE score>?""", score)
+    def search_records(self, post):
+        post = (post,)
+        self.db.cur.execute("""SELECT * FROM users WHERE post=?""", post)
         [self.tree.delete(i) for i in self.tree.get_children()]
         [self.tree.insert('', 'end', values=row) for row in self.db.cur.fetchall()]
 
@@ -117,7 +113,7 @@ class Child(tk.Toplevel):
 
     def init_child(self):
         self.title('Добавить игрока')
-        self.geometry('400x220+400+300')
+        self.geometry('400x250+400+300')
         self.resizable(False, False)
 
         label_description = tk.Label(self, text='Табельный номер')
@@ -133,7 +129,7 @@ class Child(tk.Toplevel):
         label_dob = tk.Label(self, text='Дата рождения')
         label_dob.place(x=50, y=75)
         self.dob = DateEntry(self, width=12, background='darkblue',
-                             foreground='white', borderwidth=2)
+                             foreground='white', borderwidth=2, date_pattern='MM/dd/yyyy')
         self.dob.place(x=170, y=75)
 
         label_post = tk.Label(self, text='Должность')
@@ -161,7 +157,7 @@ class Child(tk.Toplevel):
         btn_cancel.place(x=300, y=200)
 
         self.btn_ok = ttk.Button(self, text='Добавить')
-        self.btn_ok.place(x=220, y=170)
+        self.btn_ok.place(x=220, y=200)
         self.btn_ok.bind('<Button-1>', lambda event: self.view.records(self.entry_description.get(),
                                                                        self.entry_name.get(),
                                                                        self.dob.get(),
@@ -183,14 +179,14 @@ class Update(Child):
     def init_edit(self):
         self.title("Редактировать запись")
         btn_edit = ttk.Button(self, text="Редактировать")
-        btn_edit.place(x=205, y=170)
+        btn_edit.place(x=205, y=200)
         btn_edit.bind('<Button-1>', lambda event: self.view.update_record(self.entry_description.get(),
-                                                                       self.entry_name.get(),
-                                                                       self.dob.get(),
-                                                                       self.post.get(),
-                                                                       self.sd.get(),
-                                                                       self.entry_burden.get(),
-                                                                       self.entry_sall.get()))
+                                                                          self.entry_name.get(),
+                                                                          self.dob.get(),
+                                                                          self.post.get(),
+                                                                          self.sd.get(),
+                                                                          self.entry_burden.get(),
+                                                                          self.entry_sall.get()))
         self.btn_ok.destroy()
 
 
@@ -205,15 +201,17 @@ class Search(tk.Toplevel):
         self.geometry("300x100+400+300")
         self.resizable(False, False)
 
-        self.entry_search = ttk.Entry(self)
-        self.entry_search.place(x=150, y=20, width=150)
+        self.post_search = ttk.Combobox(self,
+                                        values=[u'Преподаватель', u'Старший преподаватель', u'Доцент', u'Профессор',
+                                                u'Зав кафедрой', u'Декан', u'Проректор', u'Ректор'])
+        self.post_search.place(x=150, y=20, width=150)
 
         btn_cancel = ttk.Button(self, text="Закрыть", command=self.destroy)
         btn_cancel.place(x=185, y=50)
 
         btn_search = ttk.Button(self, text="Поиск")
         btn_search.place(x=105, y=50)
-        btn_search.bind('<Button-1>', lambda event: self.view.search_records(self.entry_search.get()))
+        btn_search.bind('<Button-1>', lambda event: self.view.search_records(self.post_search.get()))
         btn_search.bind('<Button-1>', lambda event: self.destroy(), add='+')
 
 
@@ -231,10 +229,10 @@ class DB:
                 wages INTEGER
                 )""")
 
-    def insert_data(self, user_id, name, date_of_time, post, science_degree, burden, wages):
+    def insert_data(self, user_id, name, date_of_birth, post, science_degree, burden, wages):
         self.cur.execute(
-            """INSERT INTO users(user_id, name, date_of_time, post, science_degree, burden, wages) VALUES (?, ?, ?, ?, ?, ?, ?)""",
-            (user_id, name, date_of_time, post, science_degree, burden, wages))
+            """INSERT INTO users(user_id, name, date_of_birth, post, science_degree, burden, wages) VALUES (?, ?, ?, ?, ?, ?, ?)""",
+            (user_id, name, date_of_birth, post, science_degree, burden, wages))
         self.con.commit()
 
 
@@ -244,6 +242,6 @@ if __name__ == "__main__":
     app = Main(root)
     app.pack()
     root.title("Отдел кадров")
-    root.geometry("650x450+300+200")
+    root.geometry("1000x450+300+200")
     root.resizable(False, False)
     root.mainloop()

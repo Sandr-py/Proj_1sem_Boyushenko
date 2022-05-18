@@ -15,33 +15,42 @@ class Main(tk.Frame):
         self.view_records()
 
     def init_main(self):
-        toolbar = tk.Frame(bg='#a0dea0', bd=4)
+        button_color = '#d1c1b2'
+        active_button = '#595750'
+        active_button_text = '#f0e4dc'
+        toolbar = tk.Frame(bg='#e1dfd9', bd=4)
         toolbar.pack(side=tk.TOP, fill=tk.X)
 
         self.add_img = tk.PhotoImage(file="img/add.gif")
-        self.btn_open_dialog = tk.Button(toolbar, text='Добавить игрока', command=self.open_dialog, bg='#5da130', bd=0,
-                                         compound=tk.TOP, image=self.add_img)
-        self.btn_open_dialog.pack(side=tk.LEFT)
+        self.btn_open_dialog = tk.Button(toolbar, text='Добавить игрока', command=self.open_dialog, bg=button_color,
+                                         bd=0,
+                                         compound=tk.TOP, image=self.add_img, activebackground=active_button,
+                                         activeforeground=active_button_text)
+        self.btn_open_dialog.pack(side=tk.RIGHT, padx=10)
 
         self.edit_img = tk.PhotoImage(file="img/edit.gif")
-        btn_edit_dialog = tk.Button(toolbar, text="Редактировать", command=self.open_update_dialog, bg='#5da130',
-                                    bd=0, compound=tk.TOP, image=self.edit_img)
-        btn_edit_dialog.pack(side=tk.LEFT)
+        btn_edit_dialog = tk.Button(toolbar, text="Редактировать", command=self.open_update_dialog, bg=button_color,
+                                    bd=0, compound=tk.TOP, image=self.edit_img, activebackground=active_button,
+                                    activeforeground=active_button_text)
+        btn_edit_dialog.pack(side=tk.RIGHT, padx=10)
 
         self.delete_img = tk.PhotoImage(file="img/delete.gif")
-        btn_delete = tk.Button(toolbar, text="Удалить запись", command=self.delete_records, bg='#5da130',
-                               bd=0, compound=tk.TOP, image=self.delete_img)
-        btn_delete.pack(side=tk.LEFT)
+        btn_delete = tk.Button(toolbar, text="Удалить запись", command=self.delete_records, bg=button_color,
+                               bd=0, compound=tk.TOP, image=self.delete_img, activebackground=active_button,
+                               activeforeground=active_button_text)
+        btn_delete.pack(side=tk.RIGHT, padx=10)
 
         self.search_img = tk.PhotoImage(file="img/search.gif")
-        btn_search = tk.Button(toolbar, text="Поиск записи", command=self.open_search_dialog, bg='#5da130',
-                               bd=0, compound=tk.TOP, image=self.search_img)
-        btn_search.pack(side=tk.LEFT)
+        btn_search = tk.Button(toolbar, text="Поиск записи", command=self.open_search_dialog, bg=button_color,
+                               bd=0, compound=tk.TOP, image=self.search_img, activebackground=active_button,
+                               activeforeground=active_button_text)
+        btn_search.pack(side=tk.RIGHT, padx=10)
 
         self.refresh_img = tk.PhotoImage(file="img/update.gif")
-        btn_refresh = tk.Button(toolbar, text="Обновить экран", command=self.view_records, bg='#5da130',
-                                bd=0, compound=tk.TOP, image=self.refresh_img)
-        btn_refresh.pack(side=tk.LEFT)
+        btn_refresh = tk.Button(toolbar, text="Обновить экран", command=self.view_records, bg=button_color,
+                                bd=0, compound=tk.TOP, image=self.refresh_img, activebackground=active_button,
+                                activeforeground=active_button_text)
+        btn_refresh.pack(side=tk.RIGHT, padx=10)
 
         self.tree = ttk.Treeview(self, columns=(
             'user_id', 'name', 'date_of_birth', 'post', 'science_degree', 'burden', 'wages'), height=15,
@@ -50,7 +59,7 @@ class Main(tk.Frame):
         self.tree.column('user_id', width=50, anchor=tk.CENTER)
         self.tree.column('name', width=180, anchor=tk.CENTER)
         self.tree.column('date_of_birth', width=140, anchor=tk.CENTER)
-        self.tree.column('post', width=140, anchor=tk.CENTER)
+        self.tree.column('post', width=180, anchor=tk.CENTER)
         self.tree.column('science_degree', width=140, anchor=tk.CENTER)
         self.tree.column('burden', width=140, anchor=tk.CENTER)
         self.tree.column('wages', width=140, anchor=tk.CENTER)
@@ -198,19 +207,19 @@ class Search(tk.Toplevel):
 
     def init_search(self):
         self.title("Поиск")
-        self.geometry("300x100+400+300")
+        self.geometry("200x100+400+300")
         self.resizable(False, False)
 
         self.post_search = ttk.Combobox(self,
                                         values=[u'Преподаватель', u'Старший преподаватель', u'Доцент', u'Профессор',
                                                 u'Зав кафедрой', u'Декан', u'Проректор', u'Ректор'])
-        self.post_search.place(x=150, y=20, width=150)
+        self.post_search.place(x=20, y=20, width=150)
 
         btn_cancel = ttk.Button(self, text="Закрыть", command=self.destroy)
-        btn_cancel.place(x=185, y=50)
+        btn_cancel.place(x=100, y=50)
 
         btn_search = ttk.Button(self, text="Поиск")
-        btn_search.place(x=105, y=50)
+        btn_search.place(x=20, y=50)
         btn_search.bind('<Button-1>', lambda event: self.view.search_records(self.post_search.get()))
         btn_search.bind('<Button-1>', lambda event: self.destroy(), add='+')
 
